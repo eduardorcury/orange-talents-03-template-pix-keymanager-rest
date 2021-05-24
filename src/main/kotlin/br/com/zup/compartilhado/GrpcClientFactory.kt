@@ -1,18 +1,23 @@
 package br.com.zup.compartilhado
 
 import br.com.zup.KeymanagerCadastraGrpcServiceGrpc
-import br.com.zup.KeymanagerCadastraGrpcServiceGrpc.newBlockingStub
+import br.com.zup.KeymanagerDeletaGrpcServiceGrpc
 import io.grpc.ManagedChannel
 import io.micronaut.context.annotation.Factory
 import io.micronaut.grpc.annotation.GrpcChannel
 import javax.inject.Singleton
 
 @Factory
-class GrpcClientFactory {
+class GrpcClientFactory(
+    @GrpcChannel("keymanager") val channel: ManagedChannel
+) {
 
     @Singleton
-    fun keymanagerGrpcStun(@GrpcChannel("keymanager") channel: ManagedChannel):
-            KeymanagerCadastraGrpcServiceGrpc.KeymanagerCadastraGrpcServiceBlockingStub =
-        newBlockingStub(channel)
+    fun cadastraGrpcStub(): KeymanagerCadastraGrpcServiceGrpc.KeymanagerCadastraGrpcServiceBlockingStub =
+        KeymanagerCadastraGrpcServiceGrpc.newBlockingStub(channel)
+
+    @Singleton
+    fun deletaGrpcStub(): KeymanagerDeletaGrpcServiceGrpc.KeymanagerDeletaGrpcServiceBlockingStub =
+        KeymanagerDeletaGrpcServiceGrpc.newBlockingStub(channel)
 
 }
