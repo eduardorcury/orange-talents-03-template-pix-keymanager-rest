@@ -30,4 +30,10 @@ internal class GrpcClientFactoryTest {
         assertEquals("localhost:50051", grpcStun.channel.authority())
     }
 
+    @Test
+    internal fun `deve criar stub grpc de listagem`() {
+        val grpcStun = factory.listaGrpcStub()
+        assertEquals("localhost:50051", grpcStun.channel.authority())
+    }
+
 }
