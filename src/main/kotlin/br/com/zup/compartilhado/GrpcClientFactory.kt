@@ -1,6 +1,7 @@
 package br.com.zup.compartilhado
 
 import br.com.zup.KeymanagerCadastraGrpcServiceGrpc
+import br.com.zup.KeymanagerConsultaGrpcServiceGrpc
 import br.com.zup.KeymanagerDeletaGrpcServiceGrpc
 import io.grpc.ManagedChannel
 import io.micronaut.context.annotation.Factory
@@ -19,5 +20,9 @@ class GrpcClientFactory(
     @Singleton
     fun deletaGrpcStub(): KeymanagerDeletaGrpcServiceGrpc.KeymanagerDeletaGrpcServiceBlockingStub =
         KeymanagerDeletaGrpcServiceGrpc.newBlockingStub(channel)
+
+    @Singleton
+    fun detalhaGrpcStub(): KeymanagerConsultaGrpcServiceGrpc.KeymanagerConsultaGrpcServiceBlockingStub =
+        KeymanagerConsultaGrpcServiceGrpc.newBlockingStub(channel)
 
 }
