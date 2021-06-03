@@ -16,6 +16,22 @@ grpc:
       plaintext: true
       max-retry-attempts: 10
 
+endpoints:
+  all:
+    port: 8084
+  health:
+    enabled: true
+    sensitive: false
+    details-visible: ANONYMOUS
+  loggers:
+    enabled: true
+  beans:
+    enabled: true
+    sensitive: false
+  env:
+    enabled: true    # default: true
+    sensitive: false  # default: true
+
 jackson:
   serialization:
     writeDatesAsTimestamps: false

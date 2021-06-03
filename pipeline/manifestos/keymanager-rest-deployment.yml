@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment-keymanager-rest
+spec:
+  template:
+    metadata:
+      name: keymanager-rest
+      labels:
+        api: keymanager-rest
+    spec:
+      containers:
+        - name: keymanager-rest-container
+          image: public.ecr.aws/c9y1i6i4/keymanager-rest-eduardocury:latest
+          envFrom:
+            - configMapRef:
+                name: keymanager-rest-configmap
+          livenessProbe:
+            httpGet:
+              path: /health/liveness
+              port: 8084
+              scheme: HTTP
+            periodSeconds: 20
+            initialDelaySeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /health/readiness
+              port: 8084
+              scheme: HTTP
+            periodSeconds: 20
+            initialDelaySeconds: 10
+  replicas: 2
+  selector:
+    matchLabels:
+      api: keymanager-rest
