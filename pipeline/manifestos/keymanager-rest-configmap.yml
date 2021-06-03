@@ -4,4 +4,4 @@ metadata:
   name: keymanager-rest-configmap
 data:
   KEYMANAGER_HOST: svc-keymanager-grpc
-  KEYMANAGER_PORT: 50051
+  KEYMANAGER_PORT: "50051"
